@@ -34,3 +34,28 @@ updates:
   target-branch: "release-1.15"
   schedule:
     interval: weekly
+
+- package-ecosystem: docker
+  directory: /cluster/images
+  schedule:
+    interval: daily
+
+- package-ecosystem: gomod
+  directory: /
+  schedule:
+    interval: daily
+
+- package-ecosystem: docker
+  directory: /vendor/github.com/pelletier/go-toml
+  schedule:
+    interval: daily
+
+- package-ecosystem: docker
+  directory: /vendor/github.com/vektra/mockery/v3
+  schedule:
+    interval: daily
+
+- package-ecosystem: pip
+  directory: /vendor/go.opentelemetry.io/otel
+  schedule:
+    interval: daily

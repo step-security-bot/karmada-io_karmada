@@ -7,7 +7,7 @@ on:
       - 'dependabot/**'
 
 permissions:
-  contents: read # Required by actions/checkout@v6 to fetch the repository contents.
+  contents: read # Required by actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
   
 jobs:
   fossa:
@@ -18,9 +18,14 @@ jobs:
     if: ${{ github.repository == 'karmada-io/karmada' }}
     runs-on: ubuntu-22.04
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@fa2e9d605c4eeb9fcad4c99c224cee0c6c7f3594 # v2.16.0
+        with:
+          egress-policy: audit
+
       - name: checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Run FOSSA scan and upload build data
-        uses: fossas/fossa-action@v1
+        uses: fossas/fossa-action@65a5a12203e31a5fcc54154db9c52647f84b1169 # v1
         with:
           api-key: ${{secrets.FOSSA_API_KEY}}
